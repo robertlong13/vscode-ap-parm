@@ -3,27 +3,99 @@
 	"name": "ArduPilot Param",
 	"patterns": [
 		{
-			"include": "#keywords"
+			"include": "#parameter"
 		},
 		{
-			"include": "#strings"
-		}
+			"include": "#include"
+		},
+		{
+			"include": "#delete"
+		},
+		{
+			"include": "#comment"
+		},
+		{
+            "name": "invalid.illegal",
+			"match": "^(?!\\s*$)[^#]+"
+        }
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.ap-parm",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.ap-parm",
-			"begin": "\"",
-			"end": "\"",
+		"parameter": {
 			"patterns": [
 				{
-					"name": "constant.character.escape.ap-parm",
-					"match": "\\\\."
+					"name": "meta.parameter-line",
+					"match": "^\\s*([a-zA-Z0-9_-]+)(\\s+|\\s*,\\s*)(0x[0-9a-fA-F]+|0b[01]+|[+-]?\\d+(?:\\.\\d+)?|\"[^\"]*\"|'[^']*')\\s*(@[a-zA-Z]*)?\\s*(#.*)?$",
+					"captures": {
+						"1": { "name": "variable.parameter-name" },
+						"2": { "name": "punctuation.separator" },
+						"3": {
+							"patterns": [
+								{
+									"match": "0x[0-9a-fA-F]+",
+									"name": "constant.numeric.hex"
+								},
+								{
+									"match": "0b[01]+",
+									"name": "constant.numeric.binary"
+								},
+								{
+									"match": "\\d+(?:\\.\\d+)?",
+									"name": "constant.numeric.decimal"
+								},
+								{
+									"match": "\"[^\"]*\"|'[^']*'",
+									"name": "string.quoted"
+								}
+							]
+						},
+						"4": {
+							"patterns": [
+								{
+									"match": "@READONLY",
+									"name": "entity.name.tag"
+								},
+								{
+									"match": ".*",
+									"name": "invalid.illegal"
+								}
+							]
+						},
+						"5": { "name": "comment.line" }
+					}
+				}
+			]
+		},
+		"include": {
+			"patterns": [
+				{
+					"name": "meta.include-line",
+					"match": "^(@include)\\s*([^\\s]+)\\s*([^#]*)(#.*)?$",
+					"captures": {
+						"1": { "name": "keyword.control.include" },
+						"2": { "name": "string.unquoted.path" },
+						"3": { "name": "invalid.illegal" },
+						"4": { "name": "comment.line" }
+					}
+				}
+			]
+		},
+		"delete": {
+			"patterns": [
+				{
+					"name": "meta.delete-line",
+					"match": "^(@delete)\\s*([^\\s]+)",
+					"captures": {
+						"1": { "name": "keyword.control.delete" },
+						"2": { "name": "string.unquoted" }
+					}
+				}
+			]
+		},
+		"comment": {
+			"patterns": [
+				{
+					"name": "comment.line",
+					"match": "#.*$"
 				}
 			]
 		}
