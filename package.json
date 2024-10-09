@@ -1,0 +1,24 @@
+{
+  "name": "ardupilot-parameter-highlighting",
+  "displayName": "ArduPilot Parameter Highlighting",
+  "description": "Syntax highlighting for ArduPilot parameter files",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.94.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "ap-parm",
+      "aliases": ["ArduPilot Param", "ap-parm"],
+      "extensions": [".param",".parm"]
+    }],
+    "grammars": [{
+      "language": "ap-parm",
+      "scopeName": "source.ap-parm",
+      "path": "./syntaxes/ap-parm.tmLanguage.json"
+    }]
+  }
+}
