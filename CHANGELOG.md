@@ -1,9 +1,10 @@
 # Change Log
 
-All notable changes to the "ardupilot-parameter-highlighting" extension will be documented in this file.
+All notable changes to the "ardupilot-parameter-highlighting" extension will be
+documented in this file.
 
-Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file.
+## [Unreleased] - 2024-10-09
 
-## [Unreleased]
-
-- Initial release
+### Added
+- Grammar file for `.parm`/`.param` files.
+- README with feature list and installation instructions.
