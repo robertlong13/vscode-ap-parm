@@ -13,12 +13,17 @@
     "languages": [{
       "id": "ap-parm",
       "aliases": ["ArduPilot Param", "ap-parm"],
-      "extensions": [".param",".parm"]
+      "extensions": [".param",".parm"],
+      "configuration": "./language-configuration.json"
     }],
     "grammars": [{
       "language": "ap-parm",
       "scopeName": "source.ap-parm",
       "path": "./syntaxes/ap-parm.tmLanguage.json"
     }]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/robertlong13/vscode-ap-parm"
   }
 }
